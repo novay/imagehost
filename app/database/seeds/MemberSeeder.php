@@ -24,6 +24,7 @@ class MemberSeeder extends Seeder {
 			'bio'			=> 'Anak SMK biasa',
 			'akses'			=> 1,
 			'banned'		=> 0,
+			'aktif'			=> 1,
 			'konfirmasi'	=> '', #Str::random(10),
 			'created_at'	=> new DateTime, 
 			'updated_at'	=> new DateTime

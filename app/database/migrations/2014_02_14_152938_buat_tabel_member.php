@@ -25,6 +25,7 @@ class BuatTabelMember extends Migration {
 			$m->text('bio');
 			$m->integer('akses');
 			$m->integer('banned');
+			$m->integer('aktif');
 			$m->string('konfirmasi');
 			$m->timestamps();
 		});
