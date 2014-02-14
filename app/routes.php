@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+# Halaman Beranda
+Route::get('/', array('as' => 'beranda', 'uses' => 'AuthController@getIndex'));
+Route::post('/', array('uses' => 'AuthController@postLogin'));
+Route::get('logout', array('as' => 'logout', 'uses' => 'AuthController@getLogout'));

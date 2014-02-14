@@ -1,1 +1,1 @@
-Selamat Datang, {{ Auth::user()->nama_depan }} {{ Auth::user()->nama_belakang }}.
+Selamat Datang, <a href="{{ route('logout') }}">Logout</a>
