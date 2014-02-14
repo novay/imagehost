@@ -23,7 +23,6 @@ class AuthController extends BaseController {
 			# Koleksi inputan dari form
 			$username = Input::get('username');
 			$password = Input::get('password');
-			$ingat    = (Input::get('ingat') == 1) ? true : false;
 			$ingat 	  = Input::get('ingat');
 			# Gabung untuk proses pencocokan
 			$userdata = compact('username', 'password');
