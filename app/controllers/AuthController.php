@@ -4,8 +4,10 @@ class AuthController extends BaseController {
 
 	# Halaman Beranda @localhost:8000
 	public function getIndex() {
-		# Jika belum login alihkan ke halaman login
-		if (Auth::guest()) return View::make('master.login');
+		# Jika belum login
+		if (Auth::guest())
+			# Alihkan ke halaman login 
+			return View::make('master.login');
 		# Sebaliknya, tampilkan view index pada folder master
 		return View::make('master.index');
 	}
@@ -17,7 +19,9 @@ class AuthController extends BaseController {
 		# Tidak valid
 		if($validasi->fails()) {
 			# alihkan ke halaman sebelumnya dengan validasi error
-			return Redirect::back()->withInput()->withErrors($validasi);
+			return 	Redirect::back()
+					->withInput()
+					->withErrors($validasi);
 		# Bila valid
 		} else {
 			# Koleksi inputan dari form
@@ -27,19 +31,14 @@ class AuthController extends BaseController {
 			# Gabung untuk proses pencocokan
 			$userdata = compact('username', 'password');
 			#### Syarat login member ####
-			# 1. Pengguna harus terdaftar
-			if (Auth::attempt($userdata)) {
+			# 1. Pengguna harus terdaftar dengan logika ceklis remember me
+			if (Auth::attempt($userdata, $ingat)) {
 				# 2. Akun dalam keadaan aktif
 				if (Auth::user()->aktif == 1) {
 					# 3. Tidak sedang di banned
 					if (Auth::user()->banned == 0) {
 						# 4. Memiliki akses member
 						if (Auth::user()->akses == 1) {
-							# Untuk ceklis ingat saya
-							if (!empty($ingat)) {
-								# Aktifkan cookie remember me
-								Auth::login(Auth::user()->id, true);
-							}
 							# Lanjutkan ke halaman aplikasi
 							return Redirect::route('beranda');
 						# /4. Bila tidak memiliki akses member
@@ -54,14 +53,14 @@ class AuthController extends BaseController {
 						# Hapus session & cookie
 						Auth::logout();
 						# Alihkan ke halaman sebelumnya dengan session error banned
-						return Redirect::back()->with('error', 'Untuk sementara akun Anda dalam status banned.');
+						return Redirect::back()->with('error', 'Akun Anda di banned sementara. Harap hubungi Admin website.');
 					}
 				# /2. Bila akun Anda belum aktif
 				} else {
 					# Hapus session & cookie
 					Auth::logout();
 					# Alihkan ke halaman sebelumnya dengan session error konfirmasi
-					return Redirect::back()->with('error', 'Akun Anda belum dikonfirmasi, silahkan periksa email Anda.');
+					return Redirect::back()->with('error', 'Akun Anda belum dikonfirmasi, silahkan periksa ulang email Anda.');
 				}
 			# /1. Bila username dan password tidak terdaftar
 			} else {

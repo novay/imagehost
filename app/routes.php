@@ -28,5 +28,3 @@ Route::group(array('before' => 'csrf'), function() {
 	));
 
 });
-
-
