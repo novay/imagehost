@@ -1,9 +1,32 @@
 <?php
 
-# Beranda, Login & Logout
-Route::get('/', array('as' => 'beranda', 'uses' => 'AuthController@getIndex'));
-Route::post('/', array('uses' => 'AuthController@postLogin'));
-Route::get('logout', array('as' => 'logout', 'uses' => 'AuthController@getLogout'));
+# Beranda, Login
+Route::get('/', array(
+	'as'		=> 'beranda', 
+	'uses' 	=> 'AuthController@getIndex'
+));
 
-# Daftar Member Baru
-Route::post('daftar', array('as'=>'daftar', 'uses' => 'MemberController@postDaftar'));
+# Logout
+Route::get('logout', array(
+	'as' => 'logout', 
+	'uses' => 'AuthController@getLogout'
+));
+
+# Grup proteksi CSRF
+Route::group(array('before' => 'csrf'), function() {
+	
+	# Beranda, Login (POST)
+	Route::post('beranda', array(
+		'as'		=> 'beranda-masuk',
+		'uses' 	=> 'AuthController@postLogin'
+	));
+
+	# Member baru (POST)
+	Route::post('daftar', array(
+		'as'		=> 'beranda-daftar',
+		'uses'	=> 'MemberController@postDaftar'
+	));
+
+});
+
+

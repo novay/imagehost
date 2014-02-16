@@ -1,8 +1,7 @@
 @extends('_layouts.login')
 
 @section('login-form')
-{{-- ##### Form Login ##### --}}
-	{{ Form::open(array('route'=>'beranda', 'id'=>'form-login', 'class'=>'form-horizontal form-control-borderless')) }}
+	{{ Form::open(array('route'=>'beranda-masuk', 'id'=>'form-login', 'class'=>'form-horizontal form-control-borderless')) }}
 {{-- Bila user dan password tidak valid tampilkan error --}}
 		@if(Session::has('error'))
 			<div class="alert alert-warning alert-dismissable">
@@ -54,9 +53,14 @@
 		</div>
 {{-- Peralihan Pendaftaran --}}
 		<div class="form-group">
-			<div class="col-xs-12">
+			<div class="col-xs-12 animation-slideDown">
 				<p class="text-right remove-margin"><small>Anda belum memiliki akun?</small>
-					<a href="javascript:void(0)" id="link-login"><small>Buat secara gratis!</small></a>
+					<a href="javascript:void(0)" id="link-login"><small>Buat sekarang!</small></a>
+				</p>
+			</div>
+			<div class="col-xs-12 animation-slideDown">
+				<p class="text-right remove-margin"><small>Punya akun! </small>
+					<a href="javascript:void(0)" id="link-forgot"><small>Tapi lupa kata sandi?</small></a>
 				</p>
 			</div>
 		</div>
@@ -64,8 +68,7 @@
 @stop
 
 @section('register-form')
-{{-- ##### Form Register ##### --}}
-	{{ Form::open(array('route'=>'daftar', 'id'=>'form-register', 'class'=>'form-horizontal form-control-borderless display-none')) }}
+	{{ Form::open(array('route'=>'beranda-daftar', 'id'=>'form-register', 'class'=>'form-horizontal form-control-borderless display-none')) }}
 		<div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
 			<div class="col-xs-12">
 				<div class="input-group">
@@ -115,20 +118,54 @@
 			</div>
 		</div>
 		<div class="form-group form-actions">
-		<div class="col-xs-8">
-			<div class="animation-slideDown small">Dengan mendaftar berarti Anda menyetujui  
-				<a href="#modal-terms" data-toggle="modal" class="register-terms">Syarat &amp; Ketentuan</a>
+			<div class="col-xs-7">
+				<div class="animation-slideDown small">Dengan ini berarti Anda menyetujui 
+					<a href="#modal-terms" data-toggle="modal" class="register-terms">Syarat &amp; Ketentuan</a>
+				</div>
 			</div>
-		</div>
-			<div class="col-xs-4 text-right">
+			<div class="col-xs-5 text-right">
 				{{ Form::submit('Daftar Akun', array('class' => 'btn btn-sm btn-primary')) }}
 			</div>
 		</div>
 		<div class="form-group">
-			<div class="col-xs-12">
+			<div class="col-xs-12 animation-slideDown">
 				<p class="text-right remove-margin">
 					<small>Ups, Anda telah memiliki akun?</small> 
 					<a href="javascript:void(0)" id="link-register"><small>Masuk!</small></a>
+				</p>
+			</div>
+		</div>
+	{{ Form::close() }}
+@stop
+
+@section('forgot-form')
+	{{ Form::open(array('route'=>'beranda', 'id'=>'form-forgot', 'class'=>'form-horizontal form-control-borderless display-none')) }}
+{{-- Grup Email --}}
+		<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+			<div class="col-xs-12">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+					{{ Form::text('email', Input::old('email'), array(
+						'class'=>'form-control input-lg', 
+						'placeholder'=>'Masukkan Email Akun Anda')) }}
+				</div>
+				{{ $errors->has('email') ? 
+					'<span class="help-block animation-slideDown small text-center">'
+						 . $errors->first('email') . 
+					'</span>' : '' }}
+			</div>
+		</div>
+
+		<div class="form-group form-actions">
+			<div class="col-xs-12 text-right">
+				{{ Form::submit('Minta Sandi Baru', array('class'=>'btn btn-sm btn-primary')) }}
+			</div>
+		</div>
+{{-- Peralihan Pendaftaran --}}
+		<div class="form-group">
+			<div class="col-xs-12 animation-slideDown">
+				<p class="text-right remove-margin"><small>Anda ingat sandi Anda?</small>
+					<a href="javascript:void(0)" id="link-login-lagi"><small>Masuk sekarang!</small></a>
 				</p>
 			</div>
 		</div>

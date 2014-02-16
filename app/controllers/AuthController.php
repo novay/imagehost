@@ -66,7 +66,7 @@ class AuthController extends BaseController {
 			# /1. Bila username dan password tidak terdaftar
 			} else {
 				# Alihkan ke halaman sebelumnya dengan session error surel / sandi
-				return Redirect::back()->with('error', 'Username atau password yang Anda masukkan ngawur.');
+				return Redirect::back()->with('error', 'Username atau password yang dimasukkan ngawur.');
 			}
 		}
 	}

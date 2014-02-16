@@ -1,1 +1,1 @@
-@extends('_layouts.default')
+@extends('_layouts.main')

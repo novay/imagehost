@@ -29,6 +29,8 @@
 				
 				@yield('register-form')
 
+				@yield('forgot-form')
+
 			</div>
 		</div>
 		

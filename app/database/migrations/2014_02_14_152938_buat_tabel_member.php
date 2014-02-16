@@ -16,6 +16,7 @@ class BuatTabelMember extends Migration {
 			$m->integer('id');
 			$m->string('username');
 			$m->string('password');
+			$m->string('password_sementara')
 			$m->string('nama_depan');
 			$m->string('nama_belakang');
 			$m->string('email');
@@ -25,8 +26,8 @@ class BuatTabelMember extends Migration {
 			$m->text('bio');
 			$m->integer('akses');
 			$m->integer('banned');
-			$m->integer('aktif');
 			$m->string('konfirmasi');
+			$m->integer('aktif');
 			$m->timestamps();
 		});
 	}
