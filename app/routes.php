@@ -22,7 +22,7 @@ Route::group(array('before' => 'csrf'), function() {
 	));
 
 	# Member baru (POST)
-	Route::post('daftar', array(
+	Route::post('daftar/baru', array(
 		'as'		=> 'beranda-daftar',
 		'uses'	=> 'MemberController@postDaftar'
 	));
