@@ -13,21 +13,22 @@ class BuatTabelMember extends Migration {
 	public function up()
 	{
 		Schema::create('member', function($m) {
-			$m->integer('id');
+			$m->string('id', 7);
 			$m->string('username', 20);
 			$m->string('password', 50);
-			$m->string('password_sementara', 50);
-			$m->string('nama_depan', 30);
-			$m->string('nama_belakang', 30);
+			$m->string('password_sementara', 50)->nullable();
+			$m->string('nama_awal', 30);
+			$m->string('nama_akhir', 30);
 			$m->string('email', 50);
 			$m->string('avatar')->default('avatar.jpg');
 			$m->string('cover')->default('cover.jpg');
-			$m->string('profesi', 50);
-			$m->text('bio');
+			$m->string('profesi', 50)->nullable();
+			$m->text('bio')->nullable();
 			$m->integer('akses');
-			$m->integer('banned');
+			$m->integer('banned')->default(0);
 			$m->string('konfirmasi', 50);
 			$m->integer('aktif');
+			$m->integer('poin');
 			$m->timestamps();
 		});
 	}

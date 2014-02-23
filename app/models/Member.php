@@ -9,16 +9,14 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
 	protected $table = 'member';
 
 	# Field yang boleh di input
-	protected $fillable = [''];
+	protected $fillable = array('id', 'nama_awal', 'nama_akhir', 
+		'email', 'username', 'password', 'password_sementara', 
+		'avatar', 'cover', 'profesi', 'bio', 'akses', 'banned', 
+		'konfirmasi', 'aktif', 'poin'
+	);
 
 	# Field yang jadi patokan
-	protected $guarded = ['id'];
-
-	# Rules validasi
-	public static $rules = [
-		'username' => 'required|min:5|max:20|exists:member,username', 
-		'password' => 'required|min:5',
-	];
+	protected $guarded = array('id');
 
 	/**
 	 * The attributes excluded from the model's JSON form.
